@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en" ng-app="myApp">
+<head>
+  <meta charset="UTF-8">
+  <title>Angular Demo</title>
+  <script src=" https://ajax.googleapis.com/ajax/libs/angularjs/1.2.23/angular.min.js "></script>
+  <script src="scripts/controllers/main.js"></script>
+  <link rel="stylesheet" href="styles/style.css">
+</head>
+<body>
+<div class="main" ng-controller = "MyController">
+
+  <div class="search">
+    <h1>Appoinment Directory</h1>
+    <label>search: </label>
+    <input ng-model="query" placeholder="Search for appointments" autofocus>
+
+    <label class="formgroup">by:
+      <select ng-model="appoOrder">
+        <option value="name">Name</option>
+        <option value="doctor">Doctor</option>
+        <option value="date">Date</option>
+        <option value="time">Time</option>
+      </select>
+    </label>
+
+    <label class="formgroup">
+      <input type="radio" ng-model="direction" name="direction" checked>
+      ascending
+    </label>
+    <label class="formgroup">
+      <input type="radio" ng-model="direction" name="direction" value="reverse">
+      descending
+    </label>
+
+  </div>
+  <ul class="artistlist">
+    <li class="artist cf" ng-repeat="item in appoinments | filter: query | orderBy: CustomOrder:direction">
+      <div class="info">
+        <h2>{{item.name}}</h2>
+        <h3>{{item.doctor}}</h3>
+        <h3>{{item.date | date:"MM/dd/yyyy"}}</h3>
+        <h3>{{item.time}}</h3>
+      </div>
+    </li>
+  </ul>
+</div>
+</body>
+</html>
